@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet 2" href="/static/css/style.css" />
+    <title>New Recipe</title>
+  </head>
+  <body>
+    <div class="comtainer">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5"><h1>Add a New Recipe</h1></div>
+        <div class="col-5 text-end"><a href="/recipes">back to recipes</a><a class="ms-5" href="/logout">logout</a></div>
+        <div class="col-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5 bg-dark p-4 m-2">
+          {% with recipe_messages = get_flashed_messages(with_categories=True,
+          category_filter='recipe') %} {% if recipe_messages %}
+          <ul class="text-danger">
+            {% for category, message in recipe_messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% endwith %}
+          <form class="form" action="/create_recipe" method="POST">
+            <div class="mb-3">
+              <input type="hidden" value="{{user.id}}" name="user_id">
+              <label for="name" class="form-label text-light"
+                >Recipe Name:</label
+              >
+              <input type="text" class="form-control" name="name" required/>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label text-light"
+                >Description:</label
+              >
+              <textarea class="form-control" name="description" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="instructions" class="form-label text-light"
+                >Instructions:</label
+              >
+              <textarea class="form-control" name="instructions" required></textarea>
+            </div>
+        </div>
+        <div class="col-5 bg-dark p-4 m-2">
+          <form class="form" action="/login" method="POST">
+            <div class="mb-3">
+              <label for="date_cooked" class="form-label text-light"
+                >Date Cooked/Made</label
+              >
+              <input type="date" class="form-control" name="date_cooked" required/>
+            </div>
+            <div class="mb-3">
+              <select class="form-select" name="over_under" required>
+                <option selected value="0">Under</option>
+                <option value="1">Over</option>
+              </select>
+            </div>
+            <div class="row"><button type="submit" class="btn btn-primary mt-5">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+  </body>
+</html>

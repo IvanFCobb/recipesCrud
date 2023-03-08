@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet 2" href="/static/css/style.css" />
+    <title class="text-capitalize">{{recipe.name}}</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1 class="text-su">Welcome {{user.fname}}</h1>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <a class="mx-5" href="/recipes">Back to recipes</a>
+          <a href="/logout">Logout</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h3 class="text-capitalize">{{recipe.name}}</h3>
+        </div>
+        <div class="col">
+          <p class="text-end">Posted By: {{recipe.creator}}</p>
+        </div>
+      </div>
+      <table class="table table-bordered borderer">
+        <tbody>
+          <tr>
+            <th>Description:</th>
+            <td>{{recipe.description}}</td>
+          </tr>
+          <tr>
+            <th>Under 30 Minutes?</th>
+            <td>{{recipe.over_under}}</td>
+          </tr>
+          <tr>
+            <th>Instructions:</th>
+            <td>{{recipe.instructions}}</td>
+          </tr>
+          <tr>
+            <th>Date Made:</th>
+            <td>{{recipe.date_cooked}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

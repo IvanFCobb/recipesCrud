@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    padding: 40px;
+}
+
+.header {
+    display: inline-flex;
+    padding: 3px;
+}
+
+.borderer {
+    border: 3px solid black;
+}
+
+.dojo_links {
+    margin-bottom: 5px;
+}
