@@ -1,6 +1,9 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import recipe
 from flask import flash
+import re
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+
 
 
 class User:
@@ -59,10 +62,27 @@ class User:
         return user
     
     @staticmethod
-    def validate_email(data):
+    def is_valid_user(data):
+        is_valid = True
         query = "SELECT * from users WHERE email = %(email)s;"
         results = connectToMySQL('recipes').query_db(query, data)
-        if len(results) >= 1:
-            return True
-        else:
-            return False
+        if data['password'] != data['password_confirm']:
+            flash("Confrim Password Does Not Match", "register")
+            is_valid = False
+        if len(data['password']) < 4:
+            flash("Password Must Be More Than 5 Characters", "register")
+            is_valid = False
+        if len(data['fname']) < 2:
+            flash("First Name must be at least 2 characters.", "register")
+            is_valid = False
+        if len(data['lname']) < 2:
+            flash("Last Name must be at least 2 characters.", "register")
+            is_valid = False
+        if len(results) > 0:
+            flash("Email is already taken", "register")
+            is_valid = False
+        if not EMAIL_REGEX.match(data['email']):
+            flash("Invalid email address!", "register")
+            is_valid = False
+        return is_valid
+

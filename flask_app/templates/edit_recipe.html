@@ -29,7 +29,6 @@
           {% endif %} {% endwith %}
           <form class="form" action="/edit_recipe" method="POST">
             <div class="mb-3">
-              <input type="hidden" value="{{user.id}}" name="user_id">
               <input type="hidden" value="{{recipe.id}}" name="id">
               <label for="name" class="form-label text-light"
                 >Recipe Name:</label

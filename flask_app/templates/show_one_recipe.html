@@ -35,7 +35,11 @@
           </tr>
           <tr>
             <th>Under 30 Minutes?</th>
-            <td>{{recipe.over_under}}</td>
+            {% if recipe.over_under == 0 %}
+            <td class="col text-capitalize">Yes</td>
+            {% elif recipe.over_under == 1 %}
+            <td class="col text-capitalize">No</td>
+            {% endif %}
           </tr>
           <tr>
             <th>Instructions:</th>

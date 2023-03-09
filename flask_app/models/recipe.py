@@ -89,3 +89,19 @@ class Recipe:
         query = "DELETE FROM recipes WHERE (id = {});".format(
             num)
         return connectToMySQL('recipes').query_db(query)
+    
+    @staticmethod
+    def is_valid_recipe(data):
+        is_valid = True
+        if len(data['name']) < 3:
+            flash("Name must be more than 3 characters", "recipe")
+            is_valid = False
+        if len(data['description']) < 3:
+            flash("Description must be more than 3 characters", "recipe")
+            is_valid = False
+        if len(data['instructions']) < 3:
+            flash("Instructions must be more than 3 characters", "recipe")
+            is_valid = False
+        return is_valid
+
+
